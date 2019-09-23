@@ -3,13 +3,27 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\AddUserRequest;
 use Illuminate\Http\Request;
+// Khai báo model Users
+use App\Users;
 
 class userController extends Controller
 {
     function getList(){
         //render view trong laravel
         //đứng từ file views
-        return view('user');
+
+        // Lấy toàn bộ dữ liệu trong model
+        // Tên_model::all()
+        // obj>toArray() chuyển dữ liệu từ object sang array
+        // dd( Users::all()->toArray() );
+
+        // $users = Users::all();
+        // return view('user')->with('users', $users);
+
+        // Phân trang model::paginate(số bản ghi trong 1 trang)
+        $data['users'] = Users::paginate(10);
+        // $data['users'] = Users::all();
+        return view('user', $data);
     }
 
 
