@@ -7,6 +7,8 @@
     <title> @yield('title') </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- đưa các đường dẫn về gốc --}}
+    <base href="{{asset('')}}">
     <!-- Thư viện vedor -->
     <link rel="stylesheet" href="css/vendor.css">
     <link rel="stylesheet" href="css/style.css">

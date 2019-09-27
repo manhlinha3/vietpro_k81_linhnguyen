@@ -46,6 +46,6 @@ Route::get('','userController@getList');
 Route::get('add', 'userController@getAdd');
 Route::post('add', 'userController@postAdd');
 
-
-
-Route::get('edit', 'userController@getEdit');
+Route::get('edit/{idUser}', 'userController@getEdit');
+Route::post('edit/{idUser}', 'userController@postEdit');
+Route::get('del/{idUser}', 'userController@delUser');

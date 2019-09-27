@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\AddUserRequest;
+use App\Http\Requests\{AddUserRequest, EditUserRequest};
 use Illuminate\Http\Request;
 // Khai báo model Users
 use App\Users;
@@ -55,11 +55,47 @@ class userController extends Controller
         //     'id_number.required'=>'Không được để trống số CMT',
         // ];
         // $r->validate($rules,$messages);
-
+            // dd($r->all());
+        $user = new Users;
+        // $user->full = $r->input('full');
+        // $user->phone = $r->input('phone');
+        // $user->address = $r->input('address');
+        // $user->id_number = $r->input('id_number');
+        $user->full = $r->full;
+        $user->phone = $r->phone;
+        $user->address = $r->address;
+        $user->id_number = $r->id_number;
+        $user->save();
+        // dd($user);
+        // Chuyển hướng trang
+        // wwith: tạo session dạng flash (tồn tại 1 lần duy nhất sau khi được tạo)
+        return redirect('/')->with('thongbao', 'Đã thêm thành công!');
     }
 
-    function getEdit(){
+    function getEdit($idUser)
+    {
+        // dd(Users::find($idUser)->toArray());
+        $data['user'] = Users::find($idUser);
+        return view('edit_user', $data);
+        // return view('edit_user');
+    }
 
-        return view('edit_user');
+    function postEdit(EditUserRequest $r, $idUser)
+    {
+        // dd()
+        $user = Users::find($idUser)->first();
+        $user->full = $r->full;
+        $user->phone = $r->phone;
+        $user->address = $r->address;
+        $user->id_number = $r->id_number;
+        $user->update();
+        // return redirect('')->with('thongbao', 'Đã sửa thành công');
+        return redirect()->back()->with('thongbao', 'Đã sửa thành công');
+    }
+
+    function delUser($idUser)
+    {
+        Users::destroy($idUser);
+        return redirect()->back()->with('thongbao', 'Đã xóa thành công');
     }
 }

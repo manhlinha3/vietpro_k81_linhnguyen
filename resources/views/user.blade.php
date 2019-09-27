@@ -8,6 +8,11 @@
     <section class="section">
         <div class="row sameheight-container">
             <div class="col-xl-12">
+                @if (session('thongbao'))        
+                <div class="alert alert-success" role="alert">
+                    <strong>{{ session('thongbao') }}</strong>
+                </div>
+                @endif
                 <div class="card sameheight-item items" data-exclude="xs,sm,lg">
                     <form action="" method="post">
                         <div class="card-header bordered">
@@ -63,7 +68,7 @@
                         <li class="item">
                             <div class="item-row">
                                 <div class="item-col">
-                                    <a href="edit_user.html">
+                                    <a href="/edit/{{ $row->id }}">
                                         {{ $row->full }}
                                     </a>
                                 </div>
@@ -77,7 +82,7 @@
                                     {{ $row->id_number }}
                                 </div>
                                 <div class="item-col ">
-                                    <a href="#" class="btn btn-danger-outline">Xoá</a>
+                                <a href="del/{{ $row->id }}" class="btn btn-danger-outline">Xoá</a>
                                 </div>
                             </div>
                         </li>

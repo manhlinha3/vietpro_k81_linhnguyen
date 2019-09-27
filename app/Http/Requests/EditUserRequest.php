@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddUserRequest extends FormRequest
+class EditUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,15 +21,16 @@ class AddUserRequest extends FormRequest
      *
      * @return array
      */
-   function rules()
+    public function rules()
     {
         return [
             'full'=>'required|min:3|max:20',
-            'phone'=>'required|unique:users,phone',
+            'phone'=>'required|unique:users,phone,'.$this->idUser.',id',
             'address'=>'required',
             'id_number'=>'required',
         ];
     }
+
     function messages()
     {
         return [
@@ -42,5 +43,4 @@ class AddUserRequest extends FormRequest
             'id_number.required'=>'Không được để trống số CMT',
         ];
     }
-
 }
